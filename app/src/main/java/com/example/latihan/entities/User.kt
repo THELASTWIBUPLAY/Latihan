@@ -1,0 +1,7 @@
+package com.example.latihan.entities
+
+data class User(
+    val id: Int,
+    val name: String,
+    val email: String
+)
