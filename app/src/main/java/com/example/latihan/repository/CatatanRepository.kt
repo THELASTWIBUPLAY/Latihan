@@ -13,4 +13,7 @@ interface CatatanRepository {
 
     @GET("users")
     suspend fun getUsers(): Response<List<User>>
+
+    @GET("catatan")
+    suspend fun getCatatan(): Response<List<Catatan>>
 }

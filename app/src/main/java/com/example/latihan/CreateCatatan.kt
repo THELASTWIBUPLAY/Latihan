@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.latihan.databinding.ActivityCreateCatatanBinding
 import com.example.latihan.entities.Catatan
 import com.example.latihan.entities.User
+import com.example.latihan.MainActivity
 import kotlinx.coroutines.launch
 
 class CreateCatatan : AppCompatActivity() {
