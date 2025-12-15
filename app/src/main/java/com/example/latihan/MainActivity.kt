@@ -16,6 +16,7 @@ import com.example.latihan.R
 import com.example.latihan.RetrofitClient
 import com.example.latihan.databinding.ActivityMainBinding
 import com.example.latihan.adapter.CatatanAdapter
+import com.example.latihan.entities.Catatan
 import com.example.latihan.repository.CatatanRepository
 import kotlinx.coroutines.launch
 
@@ -39,7 +40,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setupEvents() {
-        adapter = CatatanAdapter(mutableListOf())
+        adapter = CatatanAdapter(mutableListOf(), object : CatatanAdapter.CatatanItemEvents{
+            override fun onEdit(catatan: Catatan) {
+                val intent = Intent(this@MainActivity, EditCatatanActivity::class.java)
+                intent.putExtra("id_catatan", catatan.id)
+
+                startActivity(intent)
+            }
+        })
         binding.container.adapter = adapter
         binding.container.layoutManager = LinearLayoutManager(this)
 

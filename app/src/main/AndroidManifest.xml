@@ -9,7 +9,6 @@
         tools:ignore="UsesCleartextTraffic" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,7 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Latihan"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".EditCatatanActivity"
+            android:exported="false" />
         <activity
             android:name=".CreateCatatan"
             android:exported="false" />
