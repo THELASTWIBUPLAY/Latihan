@@ -47,6 +47,16 @@ class MainActivity : AppCompatActivity() {
 
                 startActivity(intent)
             }
+            override fun onDelete(catatan: Catatan) {
+                androidx.appcompat.app.AlertDialog.Builder(this@MainActivity)
+                    .setTitle("Hapus Catatan")
+                    .setMessage("Apakah Anda yakin ingin menghapus catatan '${catatan.judul}'?")
+                    .setPositiveButton("Hapus") { _, _ ->
+                        catatan.id?.let { deleteData(it) }
+                    }
+                    .setNegativeButton("Batal", null)
+                    .show()
+            }
         })
         binding.container.adapter = adapter
         binding.container.layoutManager = LinearLayoutManager(this)
@@ -82,5 +92,21 @@ class MainActivity : AppCompatActivity() {
 
     fun displayMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun deleteData(id: Int) {
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.catatanRepository.deleteCatatan(id)
+                if (response.isSuccessful) {
+                    displayMessage("Catatan berhasil dihapus")
+                    loadData() // Refresh daftar catatan setelah dihapus
+                } else {
+                    displayMessage("Gagal menghapus: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                displayMessage("Koneksi gagal: ${e.message}")
+            }
+        }
     }
 }

@@ -14,6 +14,7 @@ class CatatanAdapter(
 
     interface CatatanItemEvents {
         fun onEdit(catatan: Catatan)
+        fun onDelete(catatan: Catatan)
     }
 
     inner class CatatanViewHolder(
@@ -27,6 +28,11 @@ class CatatanAdapter(
 
             view.root.setOnClickListener {
                 events.onEdit(data)
+            }
+
+            view.root.setOnLongClickListener {
+                events.onDelete(data)
+                true
             }
         }
     }
